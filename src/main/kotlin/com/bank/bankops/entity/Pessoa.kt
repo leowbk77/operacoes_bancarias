@@ -2,7 +2,8 @@ package com.bank.bankops.entity
 
 import java.time.LocalDateTime
 
-open abstract class Pessoa(protected nome: String,
-                            protected cpf: String,
-                            protected nascimento: LocalDateTime) {
+abstract class Pessoa(
+                        protected var nome: String,
+                        protected var cpf: String,
+                        protected var nascimento: LocalDateTime) {
 }
