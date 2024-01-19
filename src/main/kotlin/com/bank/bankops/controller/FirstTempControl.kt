@@ -15,4 +15,10 @@ class FirstTempControl() {
             MensagemTempDt(2, "Dois"),
             MensagemTempDt(3, "Tres"),
         )
+
+    @GetMapping("/test")
+    fun teste() = listOf(
+        MensagemTempDt(0, "GET"),
+        MensagemTempDt(1, "teste"),
+    )
 }

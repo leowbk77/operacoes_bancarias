@@ -1,8 +1,31 @@
 package com.bank.bankops.controller
 
-import com.bank.bankops.service.ClienteService // tbadd
+import
+
+import com.bank.bankops.service.ClienteService
+import com.bank.bankops.dt.ClienteDt
+
+import org.springframework.http.ResponseEntity
+import org.springframework.http.HttpStatus
 
 import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.GetMapping
 
 @RestController
-class ClienteControl(private val cliente : ClienteService){}
+@RequestMapping("/clientes")
+class ClienteControl(private val clienteService : ClienteService){
+
+    @PostMapping()
+    fun add(@RequestBody cliente : ClienteDt): ResponseEntity<ClienteDt>{
+        val addedCliente = clienteService.addCliente(cliente) // atentar para o resultado das requisicoes (pode necessitar arrumar o construtor do cliente)
+        return ResponseEntity.status(addedCliente, HttpStatus.CREATED)
+    }
+
+    @GetMapping("/{id}")
+    fun getCliente(@PathVariable(value = "id") id : Long): ResponseEntity<ClienteDt>{
+        val foundCliente = clienteService.getById(id)
+        return ResponseEntity.ok().build(foundCliente) // tratar não encontrado -> ex https://github.com/callicoder/kotlin-spring-boot-jpa-rest-api-demo/blob/master/src/main/kotlin/com/example/kotlindemo/controller/ArticleController.kt
+    }
+}
