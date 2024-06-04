@@ -7,3 +7,7 @@ class ClienteDt(
                 protected val cpf: String, 
                 protected val nascimento: LocalDateTime,
                 protected val id : Long ) {}
+
+/*
+    DATA CLASS PROVAVELMENTE DESCARTAVEIS
+ */

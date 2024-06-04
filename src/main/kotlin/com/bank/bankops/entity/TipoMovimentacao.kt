@@ -7,3 +7,5 @@ enum class TipoMovimentacao {
 }
 
 // ENUM pra simplificar, as classes serão removidas mais tarde
+// saque e depositos removidos -> rever transferencia
+//                          \-> repensar a classe movimentacao

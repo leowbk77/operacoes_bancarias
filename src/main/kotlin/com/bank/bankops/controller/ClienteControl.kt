@@ -15,7 +15,13 @@ import org.springframework.web.bind.annotation.GetMapping
 
 @RestController
 @RequestMapping("/clientes")
-class ClienteControl(private val clienteService : ClienteService){
+class ClienteControl {
+
+    private val clienteService : ClienteService
+
+    constructor(clienteService : ClienteService) {
+        this.clienteService = clienteService
+    }
 
     @PostMapping()
     fun add(@RequestBody cliente : ClienteDt): ResponseEntity<ClienteDt>{

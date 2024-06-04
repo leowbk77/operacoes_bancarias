@@ -8,3 +8,8 @@ class Conta (
              protected var ultimoAcesso: LocalDateTime,
              protected var id: Int,
              protected var idCliente: Int) {}
+
+             
+/*
+    DATA CLASS PROVAVELMENTE DESCARTAVEIS
+ */
