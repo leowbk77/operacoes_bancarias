@@ -2,14 +2,17 @@ package com.bank.bankops.entity
 
 import java.time.LocalDateTime
 
-// id ?
-@Entity()
+@Entity
 class Conta {
-    protected var dataDeCriacao: LocalDateTime
-    protected var saldo: Double
-    protected var ultimoAcesso: LocalDateTime
-    protected var id: Long
-    protected var idCliente: Long
+    protected var dataDeCriacao: LocalDateTime? = null
+    protected var saldo: Double = 0.0
+    protected var ultimoAcesso: LocalDateTime? = null
+    protected var id: Long = 0
+    protected var idCliente: Long = 0
+
+    constructor() {
+        
+    }
 
     fun temp(param: String){
         return "huehue, $param"
