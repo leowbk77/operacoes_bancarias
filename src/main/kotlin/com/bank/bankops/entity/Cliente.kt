@@ -1,19 +1,22 @@
 package com.bank.bankops.entity
 
-import java.time.LocalDateTime
+import com.bank.bankops.dto.ClienteDt
+import java.time.LocalDate
 
 @Entity
 class Cliente {
-    protected var nome : String = ""
-    protected var cpf: String = ""
-    protected var nascimento: LocalDateTime? = null
-    protected var id : Long = 0
+    var nome: String = ""
+    var cpf: String = ""
+    var nascimento: LocalDate? = null
+    var id : Long = 0
 
-    constructor() {
-        
+    constructor(clinteDt : ClienteDt) {
+        this.nome = clienteDt.nome
+        this.cpf = clienteDt.cpf
+        this.nascimento = LocalDate.of(clienteDt.nascimento)
     }
 
-    fun temp(param: String): String {
+    fun temp(param: String) : String {
         return "huehue, $param"
     }
 }

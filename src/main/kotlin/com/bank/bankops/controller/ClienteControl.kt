@@ -1,8 +1,7 @@
 package com.bank.bankops.controller
 
 import com.bank.bankops.service.ClienteService
-import com.bank.bankops.dt.ClienteDt
-
+import com.bank.bankops.dto.ClienteDt
 import org.springframework.http.ResponseEntity
 import org.springframework.http.HttpStatus
 
@@ -10,17 +9,21 @@ import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestBody
 
 @RestController
 @RequestMapping("/clientes")
 class ClienteControl {
 
-    private val clienteService : ClienteService
+    private val clienteService: ClienteService
 
     constructor(clienteService : ClienteService) {
         this.clienteService = clienteService
     }
 
+    /* Usar DTOS
+    https://stackoverflow.com/questions/69639251/should-entity-class-be-used-as-request-body
+    */
     @PostMapping()
     fun add(@RequestBody cliente : ClienteDt): ResponseEntity<ClienteDt>{
         val addedCliente = clienteService.addCliente(cliente) // atentar para o resultado das requisicoes (pode necessitar arrumar o construtor do cliente)

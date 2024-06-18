@@ -1,20 +1,23 @@
 package com.bank.bankops.entity
 
-import java.time.LocalDateTime
+import com.bank.bankops.dto.ContaDt
+import java.time.LocalDate
 
 @Entity
 class Conta {
-    protected var dataDeCriacao: LocalDateTime? = null
-    protected var saldo: Double = 0.0
-    protected var ultimoAcesso: LocalDateTime? = null
-    protected var id: Long = 0
-    protected var idCliente: Long = 0
+    var dataDeCriacao: LocalDate? = null
+    var saldo: Double = 0.0
+    var ultimoAcesso: LocalDate? = null
+    var id: Long = 0
+    var idCliente: Long = 0
 
-    constructor() {
-        
+    constructor(contaDt : ContaDt) {
+        this.dataDeCriacao = contaDt.dataDeCriacao
+        this.saldo = contaDt.saldo
+        this.ultimoAcesso = contaDt.ultimoAcesso
     }
 
-    fun temp(param: String){
+    fun temp(param: String) : String{
         return "huehue, $param"
     }
 }
