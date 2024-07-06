@@ -2,32 +2,21 @@ package com.bank.bankops.controller
 
 import com.bank.bankops.service.ClienteService
 import com.bank.bankops.dto.ClienteDt
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.*
 
-import org.springframework.web.bind.annotation.RestController
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.RequestBody
 /* TUTO
 https://medium.com/collabcode/boas-pr%C3%A1ticas-para-a-implementa%C3%A7%C3%A3o-de-apis-no-spring-boot-com-kotlin-6e77aac110da
  */
 @RestController
 @RequestMapping("/clientes")
-class ClienteControl {
-
-    private val clienteService: ClienteService
+class ClienteControl(private val clienteService: ClienteService) {
     /*
         Atentar para a injeção de dependencia nos construtores
         Evitar criação de novos objetos a cada request
      */
-    @Autowired
-    constructor(clienteService: ClienteService) {
-        this.clienteService = clienteService
-    }
 
     /* Usar DTOS
     https://stackoverflow.com/questions/69639251/should-entity-class-be-used-as-request-body
@@ -36,7 +25,10 @@ class ClienteControl {
     @PostMapping()
     fun add(@RequestBody cliente: ClienteDt): ResponseEntity<ClienteDt>{
         val addedCliente = clienteService.addCliente(cliente)
-        return ResponseEntity.status(addedCliente, HttpStatus.CREATED)
+        return ResponseEntity.status(HttpStatus.CREATED).body(addedCliente)
+        /*
+        retorno temporario até arrumar algo que faça sentido
+        * */
     }
 
     // get
