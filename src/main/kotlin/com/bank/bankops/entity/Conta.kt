@@ -10,7 +10,7 @@ class Conta(var dataDeCriacao: LocalDate,
             var ultimoAcesso: LocalDate,
             var idCliente: Long,
             @Id @GeneratedValue(strategy = GenerationType.AUTO)
-            var id: Long) {
+            var id: Long?) {
 
     constructor(contaDt: ContaDt) : this(LocalDate.parse(contaDt.dataDeCriacao), contaDt.saldo, LocalDate.parse(contaDt.ultimoAcesso), contaDt.idCliente, contaDt.id) {
     }

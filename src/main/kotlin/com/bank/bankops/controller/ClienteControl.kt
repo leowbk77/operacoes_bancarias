@@ -34,11 +34,12 @@ class ClienteControl(private val clienteService: ClienteService) {
     @GetMapping("/{id}")
     fun getClienteById(@PathVariable(value = "id") id: Long): ResponseEntity<ClienteDt>{
         val foundCliente = clienteService.getById(id)
-        return ResponseEntity.ok().build(foundCliente) 
+        return ResponseEntity.ok().body(foundCliente)
         // tratar não encontrado -> ex https://github.com/callicoder/kotlin-spring-boot-jpa-rest-api-demo/blob/master/src/main/kotlin/com/example/kotlindemo/controller/ArticleController.kt
     }
 
     // put (update)
+    /*
     @PutMapping("/{id}")
     fun updateClienteById(@PathVariable(value = "id") id: Long, @RequestBody cliente: ClienteDt): ResponseEntity<ClienteDt>{
         if(clienteService.existsById(id)){ // a verificacao pode ir pra dentro do service
@@ -60,4 +61,5 @@ class ClienteControl(private val clienteService: ClienteService) {
         }
         return ResponseEntity.notFound().build()
     }
+    */
 }

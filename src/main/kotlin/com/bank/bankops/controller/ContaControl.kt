@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*
 class ContaControl(private val contaService: ContaService) {
     //post
     @PostMapping
-    fun add(@RequestBody conta: contaDt): ResponseEntity<ClienteDt> {
+    fun add(@RequestBody conta: ContaDt): ResponseEntity<ContaDt> {
         val addedConta = contaService.addConta(conta)
         return ResponseEntity.status(HttpStatus.CREATED).body(addedConta)
         /*
@@ -19,6 +19,7 @@ class ContaControl(private val contaService: ContaService) {
         */
     }
 
+    /*
     //get
     @GetMapping("/{id}")
     fun getContaById(@PathVariable(value = "id") id: Long): ResponseEntity<ContaDt> {
@@ -37,4 +38,6 @@ class ContaControl(private val contaService: ContaService) {
     fun deleteContaById(@PathVariable(value = "id") id: Long): ResponseEntity<ContaDt> {
     // visitar o controller do cliente.
     }
+    *
+     */
 }

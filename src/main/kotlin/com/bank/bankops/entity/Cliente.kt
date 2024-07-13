@@ -9,7 +9,7 @@ class Cliente(var nome: String,
                 var cpf: String,
                 var nascimento: LocalDate,
                 @Id @GeneratedValue(strategy = GenerationType.AUTO)
-                var id: Long) {
+                var id: Long?) {
     constructor(clienteDt: ClienteDt) : this(clienteDt.nome, clienteDt.cpf, LocalDate.parse(clienteDt.nascimento), clienteDt.id) {
     }
 

@@ -7,7 +7,7 @@ data class ClienteDt(val nome: String,
                     val cpf: String,
                     // recebe como string e transforma em dateTime no service
                     val nascimento: String,
-                    var id: Long) {
+                    var id: Long?) {
     constructor(cliente: Cliente) : this(cliente.nome, cliente.cpf, cliente.nascimento.toString(), cliente.id) {
     }
 }
