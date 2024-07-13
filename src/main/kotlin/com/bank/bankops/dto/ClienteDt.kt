@@ -1,7 +1,7 @@
 package com.bank.bankops.dto
 
 import com.bank.bankops.entity.Cliente
-import java.time.LocalDateTime
+import java.time.LocalDate
 
 data class ClienteDt(val nome: String,
                     val cpf: String,

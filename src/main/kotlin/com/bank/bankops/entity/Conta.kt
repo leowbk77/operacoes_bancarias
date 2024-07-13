@@ -5,18 +5,14 @@ import java.time.LocalDate
 import jakarta.persistence.*
 
 @Entity
-class Conta {
-    var dataDeCriacao: LocalDate? = null
-    var saldo: Double = 0.0
-    var ultimoAcesso: LocalDate? = null
-    var idCliente: Long = 0
-    @Id @GeneratedValue(GenerationType.AUTO)
-    var id: Long = 0
+class Conta(var dataDeCriacao: LocalDate,
+            var saldo: Double,
+            var ultimoAcesso: LocalDate,
+            var idCliente: Long,
+            @Id @GeneratedValue(strategy = GenerationType.AUTO)
+            var id: Long) {
 
-    constructor(contaDt: ContaDt) {
-        this.dataDeCriacao = contaDt.dataDeCriacao
-        this.saldo = contaDt.saldo
-        this.ultimoAcesso = contaDt.ultimoAcesso
+    constructor(contaDt: ContaDt) : this(LocalDate.parse(contaDt.dataDeCriacao), contaDt.saldo, LocalDate.parse(contaDt.ultimoAcesso), contaDt.idCliente, contaDt.id) {
     }
 
     fun temp(param: String) : String{

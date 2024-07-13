@@ -5,7 +5,7 @@ import java.time.LocalDate
 import jakarta.persistence.*
 
 @Entity
-class Cliente (var nome: String,
+class Cliente(var nome: String,
                 var cpf: String,
                 var nascimento: LocalDate,
                 @Id @GeneratedValue(strategy = GenerationType.AUTO)

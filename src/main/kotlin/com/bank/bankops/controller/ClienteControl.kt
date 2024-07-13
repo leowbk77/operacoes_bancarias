@@ -2,7 +2,6 @@ package com.bank.bankops.controller
 
 import com.bank.bankops.service.ClienteService
 import com.bank.bankops.dto.ClienteDt
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
@@ -23,7 +22,7 @@ class ClienteControl(private val clienteService: ClienteService) {
     */
     // post
     @PostMapping()
-    fun add(@RequestBody cliente: ClienteDt): ResponseEntity<ClienteDt>{
+    fun add(@RequestBody cliente: ClienteDt): ResponseEntity<ClienteDt> {
         val addedCliente = clienteService.addCliente(cliente)
         return ResponseEntity.status(HttpStatus.CREATED).body(addedCliente)
         /*
@@ -42,8 +41,8 @@ class ClienteControl(private val clienteService: ClienteService) {
     // put (update)
     @PutMapping("/{id}")
     fun updateClienteById(@PathVariable(value = "id") id: Long, @RequestBody cliente: ClienteDt): ResponseEntity<ClienteDt>{
-        if(clienteService.existsById(id)){
-            return ResponseEntity.ok().body(clienteService.updateClienteById(id, cliente))
+        if(clienteService.existsById(id)){ // a verificacao pode ir pra dentro do service
+            return ResponseEntity.ok().body(clienteService.updateClienteById(id, cliente)) // clienteDt já tem o id 
         }
         return ResponseEntity.notFound().build()
     }
@@ -51,6 +50,10 @@ class ClienteControl(private val clienteService: ClienteService) {
     // delete
     @DeleteMapping("/{id}")
     fun deleteClienteById(@PathVariable(value = "id") id: Long, @RequestBody cliente: ClienteDt): ResponseEntity<ClienteDt>{
+        /*
+        Atentar para o update, mesma ideia.
+        Também não há necessidade de receber o DTO pela requisicao.
+        */
         if(clienteService.existsById(id)){
             clienteService.deleteClienteById(id)
             return ResponseEntity.ok()

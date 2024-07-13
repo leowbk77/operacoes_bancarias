@@ -4,27 +4,20 @@ import com.bank.bankops.service.ContaService
 import com.bank.bankops.dto.ContaDt
 import org.springframework.http.ResponseEntity
 import org.springframework.http.HttpStatus
-
-import org.springframework.web.bind.annotation.RestController
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/contas")
-class ContaControl {
-    private val contaService: ContaService
-
-    @Autowired
-    constructor(contaService: ContaService) {
-        this.contaService = contaService
-    }
-
+class ContaControl(private val contaService: ContaService) {
     //post
     @PostMapping
+    fun add(@RequestBody conta: contaDt): ResponseEntity<ClienteDt> {
+        val addedConta = contaService.addConta(conta)
+        return ResponseEntity.status(HttpStatus.CREATED).body(addedConta)
+        /*
+        return temporario
+        */
+    }
 
     //get
     @GetMapping("/{id}")
@@ -34,8 +27,14 @@ class ContaControl {
     }
 
     //put (update)
-    @PutMapping
+    @PutMapping("/{id}")
+    fun updateContaById(@PathVariable(value = "id") id: Long, @RequestBody conta: ContaDt): ResponseEntity<ContaDt> {
+    // visitar o controller do cliente.
+    }
 
     //delete
-    @DeleteMapping
+    @DeleteMapping("/{id}")
+    fun deleteContaById(@PathVariable(value = "id") id: Long): ResponseEntity<ContaDt> {
+    // visitar o controller do cliente.
+    }
 }
