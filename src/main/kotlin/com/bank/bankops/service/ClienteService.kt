@@ -4,6 +4,8 @@ import com.bank.bankops.repository.ClienteRepo
 import com.bank.bankops.dto.ClienteDt
 import com.bank.bankops.entity.Cliente
 import org.springframework.stereotype.Service
+import org.springframework.web.server.ResponseStatusException
+import org.springframework.http.HttpStatus
 
 @Service
 class ClienteService(private val clienteRepo: ClienteRepo) {
@@ -16,6 +18,6 @@ class ClienteService(private val clienteRepo: ClienteRepo) {
     fun getById(id: Long) : ClienteDt = ClienteDt(clienteRepo.findById(id).get())
 
     fun updateById(cliente: ClienteDt) {
-        clienteRepo.save(clienteRepo.findById(cliente.id).get())
+        clienteRepo.save(clienteRepo.findById(cliente.id ?: throw ResponseStatusException(HttpStatus.NOT_FOUND, "CLIENTE NULL")).get())
     }
 }

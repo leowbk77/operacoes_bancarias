@@ -5,6 +5,7 @@ import java.time.LocalDate
 import jakarta.persistence.*
 
 @Entity
+@Table(name = "conta")
 class Conta(var dataDeCriacao: LocalDate,
             var saldo: Double,
             var ultimoAcesso: LocalDate,

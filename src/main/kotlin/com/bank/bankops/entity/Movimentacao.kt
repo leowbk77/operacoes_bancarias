@@ -6,6 +6,7 @@ import jakarta.persistence.*
 import java.time.LocalDate
 
 @Entity
+@Table(name = "movimentacao")
 class Movimentacao(var tipo: Int,
                    var origemID: Long,
                    var destinoID: Long,

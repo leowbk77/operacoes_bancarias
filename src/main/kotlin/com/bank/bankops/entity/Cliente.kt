@@ -5,11 +5,12 @@ import java.time.LocalDate
 import jakarta.persistence.*
 
 @Entity
+@Table(name = "cliente")
 class Cliente(var nome: String,
                 var cpf: String,
                 var nascimento: LocalDate,
                 @Id @GeneratedValue(strategy = GenerationType.AUTO)
-                var id: Long?) {
+                var id: Long? = null) {
     constructor(clienteDt: ClienteDt) : this(clienteDt.nome, clienteDt.cpf, LocalDate.parse(clienteDt.nascimento), clienteDt.id) {
     }
 
