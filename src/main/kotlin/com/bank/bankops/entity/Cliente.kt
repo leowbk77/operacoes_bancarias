@@ -11,10 +11,7 @@ class Cliente(var nome: String,
                 var nascimento: LocalDate,
                 @Id @GeneratedValue(strategy = GenerationType.AUTO)
                 var id: Long? = null) {
-    constructor(clienteDt: ClienteDt) : this(clienteDt.nome, clienteDt.cpf, LocalDate.parse(clienteDt.nascimento), clienteDt.id) {
-    }
 
-    fun temp(param: String): String {
-        return "huehue, $param"
+    constructor(clienteDt: ClienteDt) : this(clienteDt.nome, clienteDt.cpf, LocalDate.parse(clienteDt.nascimento), clienteDt.id) {
     }
 }

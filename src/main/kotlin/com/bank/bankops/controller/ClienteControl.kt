@@ -5,6 +5,7 @@ import com.bank.bankops.dto.ClienteDt
 import org.springframework.http.ResponseEntity
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.server.ResponseStatusException
 
 /* TUTO
 https://medium.com/collabcode/boas-pr%C3%A1ticas-para-a-implementa%C3%A7%C3%A3o-de-apis-no-spring-boot-com-kotlin-6e77aac110da
@@ -23,43 +24,43 @@ class ClienteControl(private val clienteService: ClienteService) {
     // post
     @PostMapping()
     fun add(@RequestBody cliente: ClienteDt): ResponseEntity<ClienteDt> {
-        val addedCliente = clienteService.addCliente(cliente)
-        return ResponseEntity.status(HttpStatus.CREATED).body(addedCliente)
-        /*
-        retorno temporario até arrumar algo que faça sentido
-        * */
+        try {
+            return ResponseEntity(clienteService.addCliente(cliente), HttpStatus.CREATED) // -> https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/http/ResponseEntity.html
+        } catch (e: ResponseStatusException) { // exception temporaria
+            return ResponseEntity(cliente, e.statusCode)
+        }
     }
 
     // get
     @GetMapping("/{id}")
-    fun getClienteById(@PathVariable(value = "id") id: Long): ResponseEntity<ClienteDt>{
-        val foundCliente = clienteService.getById(id)
-        return ResponseEntity.ok().body(foundCliente)
-        // tratar não encontrado -> ex https://github.com/callicoder/kotlin-spring-boot-jpa-rest-api-demo/blob/master/src/main/kotlin/com/example/kotlindemo/controller/ArticleController.kt
+    fun getClienteById(@PathVariable(value = "id") id: Long): ResponseEntity<Any> {
+        try {
+            return ResponseEntity(clienteService.getById(id), HttpStatus.OK)
+        } catch (e: NoSuchElementException) {
+            return ResponseEntity(HttpStatus.NOT_FOUND)
+        }
     }
 
     // put (update)
-    /*
-    @PutMapping("/{id}")
-    fun updateClienteById(@PathVariable(value = "id") id: Long, @RequestBody cliente: ClienteDt): ResponseEntity<ClienteDt>{
-        if(clienteService.existsById(id)){ // a verificacao pode ir pra dentro do service
-            return ResponseEntity.ok().body(clienteService.updateClienteById(id, cliente)) // clienteDt já tem o id 
+    @PutMapping()
+    fun updateClienteById(@RequestBody cliente: ClienteDt): ResponseEntity<Any> {
+        try {
+            return ResponseEntity(clienteService.updateById(cliente), HttpStatus.OK)
+        } catch (e: NullPointerException) {
+            return ResponseEntity(HttpStatus.BAD_REQUEST)
+        } catch (e: NoSuchElementException) {
+            return ResponseEntity(HttpStatus.NOT_FOUND)
         }
-        return ResponseEntity.notFound().build()
     }
 
     // delete
     @DeleteMapping("/{id}")
-    fun deleteClienteById(@PathVariable(value = "id") id: Long, @RequestBody cliente: ClienteDt): ResponseEntity<ClienteDt>{
-        /*
-        Atentar para o update, mesma ideia.
-        Também não há necessidade de receber o DTO pela requisicao.
-        */
-        if(clienteService.existsById(id)){
-            clienteService.deleteClienteById(id)
-            return ResponseEntity.ok()
+    fun deleteClienteById(@PathVariable(value = "id") id: Long): ResponseEntity<Any> {
+        try {
+            return ResponseEntity(clienteService.deleteById(id), HttpStatus.OK)
+        } catch (e: NoSuchElementException) {
+            return ResponseEntity(HttpStatus.NOT_FOUND)
         }
-        return ResponseEntity.notFound().build()
     }
-    */
+
 }
