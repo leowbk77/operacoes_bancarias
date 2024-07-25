@@ -4,16 +4,15 @@ import com.bank.bankops.repository.ClienteRepo
 import com.bank.bankops.dto.ClienteDt
 import com.bank.bankops.entity.Cliente
 import org.springframework.stereotype.Service
-import org.springframework.web.server.ResponseStatusException
-import org.springframework.http.HttpStatus
 
 @Service
 class ClienteService(private val clienteRepo: ClienteRepo) {
 
     fun addCliente(clienteDt: ClienteDt): ClienteDt {
-        var novoCliente = Cliente(clienteDt)
-        clienteRepo.save(novoCliente)
-        return clienteDt
+        if(clienteDt != null) {
+            clienteRepo.save(Cliente(clienteDt))
+            return clienteDt
+        } else throw NullPointerException()
     }
 
     fun getById(id: Long): ClienteDt = ClienteDt(clienteRepo.findById(id).get())
@@ -24,10 +23,9 @@ class ClienteService(private val clienteRepo: ClienteRepo) {
         return ClienteDt(clienteRepo.saveAndFlush(Cliente(cliente)))
     }
 
-    fun deleteById(id: Long) : ClienteDt {
+    fun deleteById(id: Long): ClienteDt {
         val deleted = clienteRepo.findById(id).get()
         clienteRepo.deleteById(id)
         return ClienteDt(deleted)
     }
-    
 }

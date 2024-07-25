@@ -12,32 +12,44 @@ class ContaControl(private val contaService: ContaService) {
     //post
     @PostMapping
     fun add(@RequestBody conta: ContaDt): ResponseEntity<ContaDt> {
-        val addedConta = contaService.addConta(conta)
-        return ResponseEntity.status(HttpStatus.CREATED).body(addedConta)
-        /*
-        return temporario
-        */
+        try {
+            return ResponseEntity(contaService.addConta(conta), HttpStatus.CREATED)
+        } catch (e: NullPointerException) {
+            return ResponseEntity(conta, HttpStatus.BAD_REQUEST)
+        } catch (e: OptimisticLockingFailureException) {
+            return ResponseEntity(conta, HttpStatus.BAD_REQUEST)
+        }
     }
 
-    /*
     //get
     @GetMapping("/{id}")
-    fun getContaById(@PathVariable(value = "id") id: Long): ResponseEntity<ContaDt> {
-        val foundConta = contaService.getById(id) // tratar não encontrado
-        return ResponseEntity.ok().build(foundConta)
+    fun getContaById(@PathVariable(value = "id") id: Long): ResponseEntity<Any> {
+        try {
+            return ResponseEntity(contaService.getById(id), HttpStatus.OK)
+        } catch (: NoSuchElementException) {
+            return ResponseEntity(HttpStatus.NOT_FOUND)
+        }
     }
 
     //put (update)
-    @PutMapping("/{id}")
-    fun updateContaById(@PathVariable(value = "id") id: Long, @RequestBody conta: ContaDt): ResponseEntity<ContaDt> {
-    // visitar o controller do cliente.
+    @PutMapping()
+    fun updateConta(@RequestBody conta: ContaDt): ResponseEntity<Any> {
+        try {
+            return ResponseEntity(contaService.updateById(conta), HttpStatus.OK)
+        } catch (e: NullPointerException) {
+            return ResponseEntity(HttpStatus.BAD_REQUEST)
+        } catch (e: NoSuchElementException) {
+            return ResponseEntity(HttpStatus.NOT_FOUND)
+        }
     }
 
     //delete
     @DeleteMapping("/{id}")
-    fun deleteContaById(@PathVariable(value = "id") id: Long): ResponseEntity<ContaDt> {
-    // visitar o controller do cliente.
+    fun deleteContaById(@PathVariable(value = "id") id: Long): ResponseEntity<Any> {
+        try {
+            return ResponseEntity(contaService.deleteById(id), HttpStatus.OK)
+        } catch (e: NoSuchElementException) {
+            return ResponseEntity(HttpStatus.NOT_FOUND)
+        }
     }
-    *
-     */
 }

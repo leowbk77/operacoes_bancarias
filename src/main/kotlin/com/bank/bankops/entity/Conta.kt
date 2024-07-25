@@ -15,8 +15,4 @@ class Conta(var dataDeCriacao: LocalDate,
 
     constructor(contaDt: ContaDt) : this(LocalDate.parse(contaDt.dataDeCriacao), contaDt.saldo, LocalDate.parse(contaDt.ultimoAcesso), contaDt.idCliente, contaDt.id) {
     }
-
-    fun temp(param: String) : String{
-        return "huehue, $param"
-    }
 }
