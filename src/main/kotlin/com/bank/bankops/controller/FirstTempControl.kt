@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.http.ResponseEntity
 import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.RequestMapping
+
 // Este é um controler teste
 
 
@@ -14,6 +16,7 @@ https://medium.com/collabcode/boas-pr%C3%A1ticas-para-a-implementa%C3%A7%C3%A3o-
 data class MensagemTempDt(var id: Long, var string: String)
 
 @RestController
+@RequestMapping("/testePoint")
 class FirstTempControl() {
     /*
         Atentar para a injeção de dependencia nos construtores

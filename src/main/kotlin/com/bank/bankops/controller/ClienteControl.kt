@@ -2,10 +2,10 @@ package com.bank.bankops.controller
 
 import com.bank.bankops.service.ClienteService
 import com.bank.bankops.dto.ClienteDt
+import org.springframework.dao.OptimisticLockingFailureException
 import org.springframework.http.ResponseEntity
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
-import org.springframework.web.server.ResponseStatusException
 
 @RestController
 @RequestMapping("/clientes")
