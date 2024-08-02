@@ -27,7 +27,7 @@ class ContaControl(private val contaService: ContaService) {
     fun getContaById(@PathVariable(value = "id") id: Long): ResponseEntity<Any> {
         return try {
             ResponseEntity(contaService.getById(id), HttpStatus.OK)
-        } catch (: NoSuchElementException) {
+        } catch (e: NoSuchElementException) {
             ResponseEntity(HttpStatus.NOT_FOUND)
         }
     }
