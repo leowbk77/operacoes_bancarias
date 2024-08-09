@@ -33,4 +33,4 @@ build/
 .vscode/
 
 ### misc ###
-FirstTempControl.kt
+**/src/main/**/FirstTempControl.kt
