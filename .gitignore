@@ -33,4 +33,4 @@ build/
 .vscode/
 
 ### misc ###
-**/src/main/**/FirstTempControl.kt
+src/main/kotlin/com/bank/bankops/controller/FirstTempControl.kt
