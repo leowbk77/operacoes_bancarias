@@ -9,6 +9,6 @@ data class MovimentacaoDt(val tipo: Int,
                             val valor: Double,
                             val dataDeCriacao: LocalDate,
                             val id: Long?) {
-    constructor(movimentacao: Movimentacao) : this(movimentacao.tipo, movimentacao.origemID, movimentacao.destinoID, movimentacao.valor, movimentacao.dataDeCriacao, movimentacao.id) {
+    constructor(movimentacao: Movimentacao) : this(movimentacao.tipo, movimentacao.origemId, movimentacao.destinoId, movimentacao.valor, movimentacao.dataDeCriacao, movimentacao.id) {
     }
 }
