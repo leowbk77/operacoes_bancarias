@@ -1,2 +1,2 @@
 # operacoes_bancarias
-Sistema de simulação bancaria
+API REST kotlin/spring de operações bancárias
